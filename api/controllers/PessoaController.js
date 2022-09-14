@@ -52,6 +52,16 @@ class PessoasController{
             res.status(500).json(err.message)
         }
     }
+
+    static async restauraPessoa(req,res){
+        const id = req.params.id
+        try {
+            await database.Pessoas.restore({where: {id: Number(id)}})
+            return res.status(200).json({message: `ID: ${id} restaurado com sucesso`})
+        } catch(err){
+            res.status(500).json(err.message)
+        }
+    }
 }
 
 module.exports = PessoasController;
